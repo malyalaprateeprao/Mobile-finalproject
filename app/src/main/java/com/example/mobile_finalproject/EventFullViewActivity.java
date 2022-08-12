@@ -116,7 +116,7 @@ public class EventFullViewActivity extends AppCompatActivity {
 
 
 
-        Button button = findViewById(R.id.buttonUserShare);
+        Button button = findViewById(R.id.editbutton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
