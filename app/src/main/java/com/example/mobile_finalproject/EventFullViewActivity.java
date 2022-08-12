@@ -5,18 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mobile_finalproject.Models.ExampleItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -110,7 +115,8 @@ public class EventFullViewActivity extends AppCompatActivity {
         });
 
 
-        Button button = findViewById(R.id.editbutton);
+
+        Button button = findViewById(R.id.buttonUserShare);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

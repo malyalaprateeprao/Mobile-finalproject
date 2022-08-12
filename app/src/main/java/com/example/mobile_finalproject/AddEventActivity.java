@@ -9,10 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
+
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,6 +28,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Patterns;
@@ -82,6 +89,14 @@ public class AddEventActivity extends AppCompatActivity {
         if (extras != null) {
             hostemail = extras.getString("hostemail");
             System.out.println(hostemail + "fffffffffffffffffffffffffffffff");
+        }
+
+        //Notification check code
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("My notification", "My notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+
         }
 
         Button b = findViewById(R.id.add_event_button);
@@ -217,6 +232,17 @@ public class AddEventActivity extends AppCompatActivity {
         Toast.makeText(AddEventActivity.this,
                 "Event has been Registered Successfully!",
                 Toast.LENGTH_LONG).show();
+
+        //Sends notification whenever new event is added
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"My notification");
+        builder.setContentTitle("New event added!");
+        builder.setContentText("Check out the new event which is added!");
+        builder.setSmallIcon(R.drawable.small_logo);
+        builder.setAutoCancel(true);
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(AddEventActivity.this);
+        managerCompat.notify(1, builder.build());
+
 
         // Redirects the Host to the main events page for hosts
         Intent intent = new Intent(AddEventActivity.this, HostMainActivity.class);

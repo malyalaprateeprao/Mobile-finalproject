@@ -12,9 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.mobile_finalproject.EditEventActivity;
 import com.example.mobile_finalproject.R;
-import com.example.mobile_finalproject.RegisteredUserOfEventActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -109,13 +107,17 @@ public class UserEventFullViewActivity extends AppCompatActivity {
 
 
         //For share
-        Button button = findViewById(R.id.editbutton);
+        Button button = findViewById(R.id.buttonUserShare);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent  = new Intent(UserEventFullViewActivity.this, EditEventActivity.class);
-                //intent.putExtra("eventId", eventId);
-                //startActivity(intent);
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String body = "Download NUVent to see more events like this!";
+                String sub = "Check this event out!";
+                myIntent.putExtra(Intent.EXTRA_SUBJECT,sub);
+                myIntent.putExtra(Intent.EXTRA_TEXT,body);
+                startActivity(Intent.createChooser(myIntent, "Share Using"));
             }
         });
 
